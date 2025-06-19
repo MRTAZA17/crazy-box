@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جرعة جنون - اطلب المفاجأة الآن!</title>
+  <meta name="description" content="اطلب صندوق جرعة جنون: مفاجآت غريبة، مرعبة، مضحكة! تجربة مستحيل تنساها. اطلب الآن عبر واتساب.">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.imgur.com/UgP2Uqv.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      direction: rtl;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: brightness(0.4);
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #ff4081;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 1rem;
+    }
+    img {
+      width: 100px;
+      margin: 1rem auto;
+    }
+    .countdown {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #ffeb3b;
+      font-weight: bold;
+    }
+    .limited {
+      background: red;
+      color: white;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 10px;
+      display: inline-block;
+      transform: rotate(-6deg);
+      margin-bottom: 0.8rem;
+    }
+    a button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      background: #ff4081;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      margin-top: 1.2rem;
+      cursor: pointer;
+    }
+    a button:hover {
+      background-color: #e73370;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body onload="startCountdown(); playIntroSound();">
+  <div class="container">
+    <div class="limited">عدد محدود!</div>
+    <h1>🎁 جرعة جنون</h1>
+    <img src="https://i.imgur.com/fkH2LQ2.png" alt="صندوق غامض">
+    <p>صندوق مفاجآت غريبة، مرعبة، مضحكة... بس دائمًا <strong>غير متوقعة</strong>!</p>
+    <p>هل تجرؤ تفتحه؟</p>
+    <div class="countdown" id="countdown">جارٍ التحميل...</div>
+    <a href="https://wa.me/YOURNUMBER" target="_blank" onclick="playBoxSound()">
+      <button>اطلب الآن عبر واتساب</button>
+    </a>
+  </div>
+  <footer>
+    &copy; 2025 جرعة جنون | تجربة لا تُنسى
+  </footer>
+  <audio id="boxSound" src="https://cdn.pixabay.com/download/audio/2023/03/05/audio_56b9f0d2de.mp3" preload="auto"></audio>
+  <audio id="introSound" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_d583ba3540.mp3" preload="auto"></audio>
+  <script>
+    function playBoxSound() {
+      document.getElementById("boxSound").play();
+    }
+    function playIntroSound() {
+      setTimeout(() => {
+        document.getElementById("introSound").play();
+      }, 500);
+    }
+    function startCountdown() {
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + 2);
+      const countdownEl = document.getElementById("countdown");
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = endDate - now;
+        if (distance < 0) {
+          countdownEl.innerHTML = "انتهى العرض!";
+          return;
+        }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownEl.innerHTML = `العرض ينتهي خلال: ${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية`;
+        setTimeout(updateCountdown, 1000);
+      }
+      updateCountdown();
+    }
+  </script>
+</body>
+</html>
